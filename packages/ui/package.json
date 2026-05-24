@@ -11,8 +11,10 @@
     "lint": "eslint src"
   },
   "peerDependencies": {
+    "nativewind": "*",
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-gifted-charts": "*"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.0.0",

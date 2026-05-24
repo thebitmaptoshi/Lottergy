@@ -1,30 +1,52 @@
 # apps/lottergy
 
-**What:** The Expo app — the only `apps/*` workspace in v1. Web is the primary target; Android and iOS ship from the same code via EAS.
+**What:** The Expo app — web primary, Android/iOS via EAS later. Phase 4 wired the full route tree, persistent stores, and data flow.
 
-**Why:** GOAL.md Phase 0: scaffolded via `pnpm create expo-app` with the default Expo Router (tabs) template.
+**Why:** GOAL.md ships v1 as a polished browser app first; native shells follow. Adding a new game touches only `packages/games/` — never this app.
 
-## Stack confirmed at scaffold time (Expo SDK 56)
+## Structure (Expo Router file-based)
 
-- `expo-router` for navigation (file-based, deep-linkable per locked decision).
-- `react-native-web` for the browser target.
-- `react-native-reanimated` already bundled (needed by Monte Carlo progress + NativeWind).
-- NativeWind v4 wired manually via `tailwind.config.js`, `babel.config.js`, `metro.config.js`, `nativewind-env.d.ts`, and `import "../global.css"` in `src/app/_layout.tsx`.
+```
+src/
+  app/
+    _layout.tsx              # Stack root; mounts theme + opens disclaimer on first launch
+    (tabs)/
+      _layout.tsx            # Tabs: Catalog, Strategies, Settings
+      index.tsx              # /     — Catalog
+      strategies.tsx         # /strategies
+      settings.tsx           # /settings
+    [game]/
+      _layout.tsx            # Stack inside game segment
+      index.tsx              # /:game            — Game Detail (frequency charts)
+      edit.tsx               # /:game/edit       — Parameter Editor (?strategy=<id> opt)
+      montecarlo.tsx         # /:game/montecarlo — runner
+      results/[runId].tsx    # /:game/results/:runId — generator output
+    disclaimer.tsx           # /disclaimer (modal, first-launch + Settings re-show)
+  lib/
+    useGameData.ts           # CDN fetcher with AsyncStorage cache (offline fallback)
+    stores.ts                # Zustand stores (strategies, frequent, settings, runs)
+    useEffectiveTheme.ts     # resolves system|light|dark, syncs NativeWind + DOM
+    paramEditor.tsx          # ParamRow — control-mapping shared by editor
+```
 
-## Layout (modern Expo Router src/ layout)
+## Stores (Zustand + AsyncStorage persistence)
 
-- `src/app/` — file-based routes (`index.tsx`, `_layout.tsx`, `explore.tsx`). New screens land here per GOAL.md Phase 4.
-- `src/components/` — local UI components shipped with the template. Will be displaced by `@lottergy/ui` as Phase 4 progresses.
-- `src/constants/`, `src/hooks/` — template-provided theming + hooks.
+- `useStrategies` — saved Strategy[] (persisted).
+- `useFrequent` — MRU game-id rail (persisted, capped at 5).
+- `useSettings` — themeMode (`system`/`light`/`dark`) + disclaimerDismissed (persisted).
+- `useRuns` — in-memory only (per GOAL.md: "runId is in-memory; URL only restores latest run").
 
-## Subpackage notes
+## Data flow
 
-- `apps/lottergy/CLAUDE.md` imports `apps/lottergy/AGENTS.md` which pins Expo SDK 56 docs. Read versioned docs at `https://docs.expo.dev/versions/v56.0.0/` before editing app code.
-- `apps/lottergy/tsconfig.json` extends `expo/tsconfig.base` (NOT the root `tsconfig.base.json`).
-- Local `.gitignore` adds Expo/native ignores on top of root `.gitignore`.
+- `useGameData(gameId)` fetches `game.dataUrl` on every mount (auto-refetch per locked decision).
+- Falls back to AsyncStorage cache if offline; surfaces a "Offline — showing last cached data" banner.
+- All frequency/pool/generator math runs through `@lottergy/core` only.
 
 ## Key invariants
 
-- Do NOT add game logic here — it belongs in `packages/games/<game>/` or `packages/core/`.
-- Adding a screen = adding a file in `src/app/`. Adding a route group = adding a folder.
-- NativeWind `dark:` variants from day one (CLAUDE.md cross-cutting requirement) — every styled element must consider both modes.
+- No game-specific logic here. UI screens read `GameDefinition` from `@lottergy/games` and call `@lottergy/core` functions.
+- Routes match GOAL.md locked spec verbatim; the in-app share URL restores the same view.
+- Dark mode via NativeWind `dark:` on every styled element from day one. Settings → Theme is `system` default; `light` and `dark` are explicit overrides.
+- Disclaimer modal opens on first launch (locked detail), persisted via `useSettings.disclaimerDismissed`. Settings → "Re-show first-launch disclaimer" resets the flag.
+- Monte Carlo currently runs in-thread via the kernel (the Web Worker harness in `@lottergy/core/montecarlo.worker.ts` is wired but not yet bundled by Metro for web; the kernel's `onProgress`/`isCanceled` callbacks keep the UI responsive in the meantime).
+- The Metro alias `react-native-linear-gradient → expo-linear-gradient` (`metro.config.js`) is required for `react-native-gifted-charts` to resolve under Expo.
