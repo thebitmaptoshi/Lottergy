@@ -1,0 +1,22 @@
+{
+  "name": "lottergy-monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Lottergy monorepo — cross-platform lottery analysis app",
+  "license": "MIT",
+  "packageManager": "pnpm@11.2.2",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "web": "pnpm --filter lottergy web",
+    "android": "pnpm --filter lottergy android",
+    "ios": "pnpm --filter lottergy ios",
+    "test": "pnpm -r --filter ./packages/* test",
+    "lint": "pnpm -r lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}

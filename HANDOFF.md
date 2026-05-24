@@ -61,7 +61,9 @@ Snapshot the new state. Move completed items out of "next session" and into "com
 
 *(Append to this section any decision you made under Autonomy contract rule 4. Format: `**[phase] decision** — chose X because Y. User: review if you want different.`)*
 
-*(none yet — session 1 captured everything in GOAL.md's locked details)*
+- **[Phase 1] Pages source = "GitHub Actions" (not main /data)** — GitHub Pages only supports `/` or `/docs` as the source folder when serving from a branch. `/data` (GOAL.md locked detail) is impossible. Chose to use Pages-from-Actions so a workflow uploads the `data/` directory as the Pages artifact, preserving the locked URL `https://thebitmaptoshi.github.io/Lottergy/v1/<game>.json`. User currently has Pages set to "Deploy from a branch — main / (root)" (set on 2026-05-23 before this was noticed); will need to flip to "GitHub Actions" before the first scrape lands. **User: confirm or override before Phase 1 first-scrape approval point.**
+- **[Phase 0] Bootstrap commit precedes the locked Phase 0 scaffold commit** — User asked to commit the current docs+legacy state early so push auth could be validated cheaply. The Phase 0 commit message in GOAL.md was reserved for the scaffold; bootstrap commit went in as `initial commit` (865ea31), Phase 0 scaffold ships as commit #2. User: harmless, but flagged for completeness.
+- **[Phase 0] pnpm installed via standalone installer, not corepack** — `corepack enable` needs admin to write under `C:\Program Files\nodejs\`. Used `iwr https://get.pnpm.io/install.ps1` instead, which installs to `%LOCALAPPDATA%\pnpm` (user scope). Functionally identical. User: future agents may need the same workaround.
 
 ---
 

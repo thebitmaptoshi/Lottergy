@@ -13,6 +13,24 @@ Auto-loaded docs (CLAUDE / CONTEXT / REFERENCE) are imported via CLAUDE.md's `@`
 - [LICENSE](file-summaries/LICENSE.md) — MIT, 2026, "thebitmaptoshi".
 - [.gitignore](file-summaries/.gitignore.md) — Node + Python + env + OS + IDE ignores.
 
+## Monorepo root
+
+- [package.json](file-summaries/package.json.md) — root workspace manifest; pnpm-managed; top-level scripts (`web`, `test`, `lint`, `format`).
+- [pnpm-workspace.yaml](file-summaries/pnpm-workspace.yaml.md) — workspace globs: `apps/*`, `packages/*`, `scripts/*`.
+- [tsconfig.base.json](file-summaries/tsconfig.base.json.md) — shared TS config for `packages/*` and `scripts/*` (strict, ESNext, Bundler).
+- [.npmrc](file-summaries/.npmrc.md) — pnpm settings tuned for Expo+RN monorepo (`node-linker=hoisted`).
+- [eslint.config.js](file-summaries/eslint.config.js.md) — flat ESLint config for `packages/*` + `scripts/*` (`apps/*` uses Expo's own).
+
+## Apps
+
+- [apps/lottergy](file-summaries/apps/lottergy.md) — the Expo app (web primary, native via EAS). Expo SDK 56, Expo Router, NativeWind v4.
+
+## Packages
+
+- [packages/core](file-summaries/packages/core.md) — game-agnostic logic: pool, constraints, samplers, Monte Carlo, strategy. TS port of `powerball-legacy/`.
+- [packages/games](file-summaries/packages/games.md) — per-game data only (matrix, eras, data URL, default preset, info copy). No logic.
+- [packages/ui](file-summaries/packages/ui.md) — shared cross-platform UI primitives (info bubble, controls, `ResultsVisualizer`).
+
 ## Legacy reference (`powerball-legacy/`)
 
 - [powerball_analysis.py](file-summaries/powerball-legacy/powerball_analysis.py.md) — fetches NY Open Data draws, emits frequency tables.
