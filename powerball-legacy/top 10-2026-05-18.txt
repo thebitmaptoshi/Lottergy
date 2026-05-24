@@ -1,0 +1,27 @@
+Loaded config: powerball_tickets.ini
+Saving output to: C:\Users\zmaki\powerball\top 10-2026-05-18.txt
+Running powerball_analysis.py for fresh frequency data...
+
+WHITE pool: 22 of 69 balls  (exclude_top=0.0%, >7.5%, top_n=no cap)
+  #21(8.89%), #61(8.89%), #64(8.74%), #28(8.67%), #23(8.59%), #27(8.52%), #33(8.44%), #36(8.44%), #63(8.44%), #32(8.37%), #69(8.37%), #62(8.15%), #47(8.07%), #37(8.00%), #52(8.00%), #53(8.00%), #03(7.85%), #39(7.78%), #59(7.78%), #44(7.70%), #06(7.63%), #12(7.56%)
+RED pool:   13 of 26 balls  (exclude_top=0.0%, >3.85%, top_n=no cap)
+  PB04(4.74%), PB14(4.59%), PB21(4.59%), PB24(4.59%), PB18(4.37%), PB01(4.30%), PB05(4.30%), PB20(4.30%), PB25(4.22%), PB09(4.07%), PB26(3.93%), PB02(3.85%), PB03(3.85%)
+
+========================================================================
+10 SUGGESTED TICKETS
+========================================================================
+Hard:  sum 125-224 | odd-count [2, 3] | low-count [2, 3] (low<=34) | consec<=1 | decades 3-4
+Soft:  P(accept 1-consec)=0.55
+
+  # 1  23-28-36-39-61   PB 25 - sum=187 - odd/even=3/2 - low/hi=2/3 - consec=0 - decades=3
+  # 2  28-32-37-52-69   PB 02 - sum=218 - odd/even=2/3 - low/hi=2/3 - consec=0 - decades=4
+  # 3  06-27-32-36-37   PB 24 - sum=138 - odd/even=2/3 - low/hi=3/2 - consec=1 - decades=3
+  # 4  03-06-37-44-61   PB 03 - sum=151 - odd/even=3/2 - low/hi=2/3 - consec=0 - decades=4
+  # 5  12-33-36-59-62   PB 03 - sum=202 - odd/even=2/3 - low/hi=2/3 - consec=0 - decades=4
+  # 6  21-32-33-39-62   PB 18 - sum=187 - odd/even=3/2 - low/hi=3/2 - consec=1 - decades=3
+  # 7  06-27-33-52-53   PB 20 - sum=171 - odd/even=3/2 - low/hi=3/2 - consec=1 - decades=4
+  # 8  06-12-52-63-69   PB 14 - sum=202 - odd/even=2/3 - low/hi=2/3 - consec=0 - decades=4
+  # 9  23-28-39-53-62   PB 02 - sum=205 - odd/even=3/2 - low/hi=2/3 - consec=0 - decades=4
+  #10  03-06-28-61-63   PB 18 - sum=161 - odd/even=3/2 - low/hi=3/2 - consec=0 - decades=3
+
+Generated 10/10 unique tickets in 31 attempts.

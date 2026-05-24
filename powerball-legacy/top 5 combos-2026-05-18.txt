@@ -1,0 +1,15 @@
+
+============================================================================
+TOP 5 MOST-FREQUENT 5-WHITE-BALL COMBOS
+============================================================================
+Total draws:        1,000,000
+Unique white combos: 7,351 (of C(22,5) = 26,334 possible from the pool)
+Wall time:          6.8s (147,867 draws/sec)
+
+Config: pool 22W x 13R | sum 125-224 | odd [2, 3] | low [2, 3] | consec<=1 | decades 3-4
+
+  #1  21-28-36-61-64  -  drawn x 244 (0.0244%)  -  top PB partner: 09 (x 27, 11.07% of this combo's draws)
+  #2  21-28-33-36-61  -  drawn x 233 (0.0233%)  -  top PB partner: 04 (x 22, 9.44% of this combo's draws)
+  #3  23-33-36-61-64  -  drawn x 233 (0.0233%)  -  top PB partner: 21 (x 23, 9.87% of this combo's draws)
+  #4  21-23-36-52-61  -  drawn x 231 (0.0231%)  -  top PB partner: 26 (x 22, 9.52% of this combo's draws)
+  #5  03-28-36-61-69  -  drawn x 229 (0.0229%)  -  top PB partner: 01 (x 24, 10.48% of this combo's draws)

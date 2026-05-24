@@ -1,0 +1,27 @@
+# Node / JS (forward-looking)
+node_modules/
+.expo/
+dist/
+build/
+coverage/
+.vitest/
+
+# Python (for powerball-legacy/)
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Logs / env / OS
+*.log
+.env
+.env.*
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+
+# Claude Code (local-only settings, do not share)
+.claude/settings.local.json
